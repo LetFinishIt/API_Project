@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<FinalProjectLibrary.Models.Booking>
+
+@{
+    ViewData["Title"] = "Bookings List";
+}
+
+<h2>Bookings List</h2>
+
+<p class="pull-left">
+    <a asp-action="Create">Create Booking</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingSlot.Restaurant.RestaurantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingSlot.SlotTime)
+            </th>
+            <th>
+                Booked By
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingSlot.Restaurant.RestaurantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingSlot.SlotTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@item.BookingId">Details</a>
+
+                @if (Context.Session.GetInt32("UserId") == item.UserId)
+                {
+                    <span>
+                        |
+                        <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
+                    </span>
+                }
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

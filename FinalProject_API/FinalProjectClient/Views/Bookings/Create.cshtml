@@ -1,0 +1,39 @@
+﻿@model FinalProjectLibrary.Models.Booking
+
+@{
+    ViewData["Title"] = "Create Booking";
+}
+
+<h1>Create Booking</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumberOfSeats" class="control-label"></label>*
+                <input asp-for="NumberOfSeats" class="form-control" type="number" required />
+                <span asp-validation-for="NumberOfSeats" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Booking Slot</label>*
+                <select class="form-control" asp-for="BookingSlotId" required>
+                    @foreach (var item in Model.BookingSlotsDropdown)
+                    {
+                        <option value=@item.BookingSlotId>@item.Restaurant.RestaurantName @item.SlotTime</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

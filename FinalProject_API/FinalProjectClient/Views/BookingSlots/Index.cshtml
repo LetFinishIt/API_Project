@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<FinalProjectLibrary.Models.BookingSlot>
+
+@{
+    ViewData["Title"] = "Booking Slots List";
+}
+
+<h2>Booking Slots List</h2>
+
+<p class="pull-left">
+    <a asp-action="Create">Create Booking Slot</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingSlotId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SlotTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurant.RestaurantName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingSlotId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SlotTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.BookingSlotId">Details</a>
+
+                    @if (Context.Session.GetInt32("UserId") == item.Restaurant.OwnerUserId)
+                    {
+                        <span>
+                            |
+                            <a asp-action="Edit" asp-route-id="@item.BookingSlotId">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.BookingSlotId">Delete</a>
+                        </span>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

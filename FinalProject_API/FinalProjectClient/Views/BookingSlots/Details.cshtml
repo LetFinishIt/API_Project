@@ -1,0 +1,73 @@
+﻿@model FinalProjectLibrary.Models.BookingSlot
+
+@{
+    ViewData["Title"] = "Booking Slot Details";
+}
+
+<h2>Booking Slot Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingSlotId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookingSlotId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SlotTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SlotTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Restaurant.RestaurantName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Restaurant.RestaurantName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bookings)
+        </dt>
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Booking Id
+                        </th>
+                        <th>
+                            Number of Seats
+                        </th>
+                        <th>
+                            Booked By
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Bookings)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumberOfSeats)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Email)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to Booking Slots List</a>
+</div>

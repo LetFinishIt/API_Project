@@ -1,0 +1,125 @@
+﻿@model FinalProjectLibrary.Models.UserCred
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Bookings)
+        </dt>
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Booking Id
+                        </th>
+                        <th>
+                            Number of Seats
+                        </th>
+                        <th>
+                            Restaurant Name
+                        </th>
+                        <th>
+                            Slot Time
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Bookings)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfSeats)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingSlot.Restaurant.RestaurantName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingSlot.SlotTime)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+
+
+        <dt>
+            Owned Restaurants 
+        </dt>
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Restaurant Id
+                        </th>
+                        <th>
+                            Restaurant Name
+                        </th>
+                        <th>
+                            Restaurant Address
+                        </th>
+                        <th>
+                            Restaurant City
+                        </th>
+                        <th>
+                            Cuisine Type
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Restaurants)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RestaurantId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RestaurantName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RestaurantAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RestaurantCity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CuisineType)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to Users List</a>
+</div>

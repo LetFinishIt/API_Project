@@ -1,0 +1,84 @@
+﻿@model FinalProjectLibrary.Models.Restaurant
+
+@{
+    ViewData["Title"] = "Restaurant Details";
+}
+
+<h2>Restaurant Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CuisineType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CuisineType)
+        </dd>
+        <dt>
+            Owner User Email
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwnerUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingSlots)
+        </dt>
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Booking Slot Id
+                        </th>
+                        <th>
+                            Slot Time
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.BookingSlots)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingSlotId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SlotTime)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to Restaurants List</a>
+</div>

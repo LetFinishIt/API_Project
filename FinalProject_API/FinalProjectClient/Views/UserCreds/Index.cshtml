@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<FinalProjectLibrary.Models.UserCred>
+
+@{
+    ViewData["Title"] = "Users List";
+}
+
+<h2>Users List</h2>
+
+<p class="pull-left">
+    <a asp-action="Create">Create User</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.UserId">Details</a>
+                    @if (Context.Session.GetInt32("UserId") == item.UserId)
+                    {
+                        <span>
+                            |
+                            <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                        </span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

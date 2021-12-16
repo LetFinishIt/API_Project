@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<FinalProjectLibrary.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Restaurants List";
+}
+
+<h2>Restaurants List</h2>
+
+<p class="pull-left">
+    <a asp-action="Create">Create Restaurant</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CuisineType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuisineType)
+            </td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a>
+
+                @if (Context.Session.GetInt32("UserId") == item.OwnerUserId)
+                {
+                    <span>
+                        |
+                        <a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.RestaurantId">Delete</a>
+                    </span>
+                }
+
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
